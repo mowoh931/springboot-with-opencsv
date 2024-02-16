@@ -31,7 +31,6 @@ public class SpringbootWithOpencsvApplication {
         FileReader in = new FileReader(filePath);
         Iterable<CSVRecord> csvRecords = csvFormat.parse(in);
         csvRecords.forEach(csvRecord -> {
-//            System.out.println(csvRecord);
 
             String firstName = csvRecord.get(PersonHeader.firstName);
             String id = csvRecord.get(PersonHeader.id);
@@ -39,12 +38,16 @@ public class SpringbootWithOpencsvApplication {
             Person person = new Person();
             person.setId(Integer.valueOf(id));
             person.setFirstName(firstName);
+            person.setLastName(csvRecord.get(PersonHeader.lastName));
+            person.setEmail(csvRecord.get(PersonHeader.email));
+            person.setGender(csvRecord.get(PersonHeader.gender));
+            person.setIpAddress(csvRecord.get(PersonHeader.ipAddress));
             persons.add(person);
 
         });
 
 
-      persons.forEach(person -> System.out.println(person));
+        persons.forEach(System.out::println);
 
 
     }
